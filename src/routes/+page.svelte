@@ -1,69 +1,79 @@
 <script>
-    import { onMount } from 'svelte';
-    import { flip } from "svelte/animate";
-    
-    /**
-	 * @type {{ name: string; url: string; } | undefined}
-	 */
-    let page;
-    let sites = [
-        {name: 'Home', url: '/'},
-        {name: 'About', url: '/about'},
-        {name: 'Contact', url: '/contact'}
-    ]
-
-    onMount(() => {
-        page = sites.find(site => site.url === window.location.pathname);
-        setInterval(() => {
-            page = sites.find(site => site.url === window.location.pathname);
-        }, 1000);
-        setInterval(() => {
-            center();
-        }, 1000);
-    })
-    
-
-    function center(){
-        if(!page){
-            return;
-        }
-        let center = sites.splice(sites.findIndex(site => site.url === page?.url), 1);
-        let left = sites.slice(0, Math.floor(sites.length/2));
-        let right = sites.slice(Math.floor(sites.length/2), sites.length);
-        sites = [...left, ...center, ...right];
-    }
-    center();
+    import Naruto from "$lib/naruto.jpg"
+    import Mathe from "$lib/Mathe.jpg"
+    import Sketch from "$lib/ske.png"
+    import SP from "$lib/SP.png"
 </script>
 
 
-<nav>
-    {#each sites as site (site)}
-        <a animate:flip href={site.url}>{site.name}</a>
-    {/each}
-</nav>
+<div class="cards">
+<div class="card">
+    <span>Education</span>
+    <img src={Naruto} alt="naruto"></div>
+<div class="card">
+    <span>Chess</span>
+    <img src={Mathe} alt="Mathe"></div>
+<div class="card">
+    <span>Biking</span>
+    <img src={Sketch} alt="Sketch"></div>
+<div class="card">
+    <span>Finance</span>
+    <img src={SP} alt="SP"></div>
+</div>
 
 
 <style>
-    nav{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: #170545;
-        color: #fff;
-        padding: 1rem;
-        width: 50%;
-        margin: 0 auto;
-        border-radius: 3rem;
-        box-shadow: white 0px 0px 10px 0px;
-    }
+.cards{
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: 1fr 1fr;
+gap: 15%;
+width: fit-content;    
+height: fit-content;
+align-content: start;
+justify-content: center;
+margin-top: 10%;
+}
 
-    nav a{
-        text-decoration: none;
-        color: #fff;
-        padding: 0.5rem;
-        border-radius: 2rem;
-        font-size: 1.2rem;
-    }
 
-    
+img{
+    width: 0%;
+    height: 0%;
+    border-radius: 50px;
+    transition: 1s;
+}
+
+.card:hover >img{
+    transition: 1s;
+width: 100%;
+height: 100%;
+}
+
+.card:hover >span{
+    font-size: larger;
+    text-decoration: underline;
+    transition: 1s ;
+    margin-bottom: 5%;
+}
+
+.card:hover{
+    background-color: transparent;
+    transition: 1s;
+}
+
+.card{
+    object-fit: cover;
+    width: 15vw;
+    height: 40vh;
+    background-color: black;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+span{
+    color: white;
+}
 </style>
