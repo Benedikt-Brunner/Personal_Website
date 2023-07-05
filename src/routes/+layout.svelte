@@ -15,7 +15,8 @@
 <style>
 
 	.nav{
-		width: 100%;
+		width: 90%;
+		margin-left: 5%;
 		display: flex;
 		justify-content: center;
 	}
@@ -33,7 +34,7 @@
 		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		max-width: 64rem;
+		max-width: 100rem;
 		justify-content: center;
 		align-items: center;
 		box-sizing: border-box;
